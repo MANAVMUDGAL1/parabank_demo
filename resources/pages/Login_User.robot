@@ -4,7 +4,7 @@ Library    SeleniumLibrary
 
 *** Keywords ***
 Login User
-    Wait Until Element Is Visible    ${Username}
+    Wait Until Element Is Visible    ${Username}    10s
     Input Text    ${Username}    west5
     Input Text    ${Password}    1234
     Click Button   ${Login_Button}
