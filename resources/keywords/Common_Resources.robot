@@ -23,7 +23,7 @@ Close Application
 Get Account Details
     Wait Until Element Is Visible    ${ACCOUNT_OVERVIEW}
     Click Element    ${ACCOUNT_OVERVIEW}
-    Sleep  2s
+    Wait Until Element Is Visible    ${Acc_id_path}    10s
     ${account_id}=    Get Text    ${Acc_id_path}
     ${acc_balance}=    Get Text    ${Acc_balance_path}
     Set Suite Variable    ${ACCOUNT_ID}    ${account_id}
