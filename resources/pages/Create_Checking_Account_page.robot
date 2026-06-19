@@ -6,7 +6,7 @@ Library  SeleniumLibrary
 Create Checking Account
     Wait Until Element Is Visible    ${Open_new_account}
     Click Element    ${Open_new_account}
-    Sleep    2s
+    Wait Until Element Is Visible    ${Account_type}    10s
     Select From List By Value    ${Account_type}    0
     Click Element    ${Open_new_account_button}
     Wait Until Element Is Visible    xpath=(//a[contains(@href,'activity')])[1]
