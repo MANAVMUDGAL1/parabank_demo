@@ -21,6 +21,7 @@ Close Application
     Close All Browsers
 
 Get Account Details
+    Wait Until Element Is Visible    ${ACCOUNT_OVERVIEW}
     Click Element    ${ACCOUNT_OVERVIEW}
     Sleep  2s
     ${account_id}=    Get Text    ${Acc_id_path}
