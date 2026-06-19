@@ -4,6 +4,7 @@ Library  SeleniumLibrary
 
 *** Keywords ***
 Create Checking Account
+    Wait Until Element Is Visible    ${Open_new_account}
     Click Element    ${Open_new_account}
     Sleep    2s
     Select From List By Value    ${Account_type}    0
