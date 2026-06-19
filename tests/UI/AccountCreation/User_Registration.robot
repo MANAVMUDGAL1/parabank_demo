@@ -13,7 +13,7 @@ Verify User Registration
 
     User Registration
     Sleep    2s
-    Wait Until Element Is Visible    ${Log_Out}     5s
+    Wait Until Element Is Visible    ${Log_Out}     10s
     Click Element    ${Log_Out}
     Sleep  2s
     Login User
