@@ -27,7 +27,7 @@ pipeline {
             steps {
                 echo "==== Checking out source code from SCM ===="
                 checkout scm
-                echo "Checkout complete. Workspace: %WORKSPACE%"
+                echo "Checkout complete."
             }
         }
 
@@ -123,7 +123,7 @@ pipeline {
         }
 
         // -------------------------------------------------------------
-        // Stage 5: Execute all Robot Framework tests parallel
+        // Stage 5: Execute all Robot Framework tests in parallel
         // -------------------------------------------------------------
         stage('Execute Robot Tests') {
             steps {
@@ -162,7 +162,6 @@ pipeline {
 
                     if (fileExists(outputXml)) {
                         try {
-                            // Attempt to use the Robot Framework plugin if installed
                             step([
                                 $class            : 'RobotPublisher',
                                 outputPath        : "${env.OUTPUT_DIR}",
@@ -185,6 +184,10 @@ pipeline {
                 }
             }
         }
+
+        // -------------------------------------------------------------
+        // Stage 7: Generate Allure HTML report
+        // -------------------------------------------------------------
         stage('Generate Allure Report') {
             steps {
                 echo "==== Generating Allure HTML report ===="
@@ -213,6 +216,9 @@ pipeline {
             }
         }
 
+        // -------------------------------------------------------------
+        // Stage 8: Generate Robot Metrics report
+        // -------------------------------------------------------------
         stage('Generate Robot Metrics') {
             steps {
                 echo "==== Generating Robot Framework Metrics report ===="
@@ -232,14 +238,13 @@ pipeline {
                         echo Robot Framework Metrics report generated successfully.
                     )
 
-                    rem Always exit 0 so this optional/non-critical stage never fails the build
                     exit /b 0
                 """
             }
         }
 
         // -------------------------------------------------------------
-        // Stage 7: Archive generated reports and logs as artifacts
+        // Stage 9: Archive generated reports and logs as artifacts
         // -------------------------------------------------------------
         stage('Archive Artifacts') {
             steps {
@@ -271,11 +276,11 @@ pipeline {
                 }
             }
 
-            // Clean only transient cache/temp files; never remove the venv or output reports
+            // ✅ FIX: "%WORKSPACE%" properly quoted to handle spaces in path (e.g. "Manav Mudgal")
             bat """
                 @echo off
                 echo Cleaning up temporary pycache files (preserving venv and output)...
-                for /d /r %WORKSPACE% %%d in (__pycache__) do (
+                for /d /r "%WORKSPACE%" %%d in (__pycache__) do (
                     if exist "%%d" rmdir /s /q "%%d"
                 )
                 echo Cleanup complete.
