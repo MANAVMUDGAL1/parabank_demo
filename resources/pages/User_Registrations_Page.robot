@@ -4,7 +4,8 @@ Library     SeleniumLibrary
 
 *** Keywords ***
 User Registration
-    
+
+    Wait Until Element Is Visible    ${Register}    
     Click Element    ${Register}
     Sleep    2s
     
