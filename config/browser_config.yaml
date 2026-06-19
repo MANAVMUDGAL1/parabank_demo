@@ -1,0 +1,6 @@
+qa:
+  baseurl:  'https://parabank.parasoft.com'
+  ph_no: ''
+dev:
+  baseurl: 'https://parabank.parasoft.com'
+  ph_no: ''
