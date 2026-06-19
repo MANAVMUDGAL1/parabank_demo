@@ -18,4 +18,4 @@ Fund Transfer Between Two Accounts
     Log To Console    From Account: ${from_acc}
     Log To Console    To Account: ${to_acc}
     Log To Console    Amount: ${amt}
-    Sleep    2s
+    Wait Until Page Contains    Transfer Complete!    10s
